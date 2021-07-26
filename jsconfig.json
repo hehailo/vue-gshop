@@ -1,0 +1,10 @@
+// 配置@ 提示符
+{
+    "compilerOptions": {
+      "baseUrl": "./",
+      "paths": {
+          "@/*": ["src/*"]
+      }
+    },
+    "exclude": ["node_modules", "dist"]
+  }
