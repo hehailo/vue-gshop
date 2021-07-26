@@ -38,7 +38,7 @@
                 </h1>
                 <div class="searchArea">
                     <form action="###" class="searchForm">
-                        <input type="text" id="autocomplete" class="input-error input-xxlarge" />
+                        <input type="text" v-model="keyword" id="autocomplete" class="input-error input-xxlarge" />
                         <button @click="toSearch" class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
                     </form>
                 </div>
@@ -50,9 +50,32 @@
 <script>
     export default {
         name:'Header',
+        data(){
+          return {
+            keyword:''
+          }
+        },
         methods:{
           toSearch(){
-            this.$router.push('/search')
+
+            // 如果传递的参数包含params参数，就不能使用path去配合，只能用name去配合
+            let location = {
+              name: "search",
+            // 面试3   如果指定name与params配置, 
+            //但params中数据是一个"", 无法跳转，路径会出问题
+            // 1、不传params参数
+            // 2、首先必须在params参数可传可不传的前提下，
+            //当传递的参数是空串的时候，传递成undefined,就不出问题
+              params: { keyword: this.keyword || undefined},
+            };
+
+            //如果是从home页跳search页，就push
+            //如果是search页跳search页，就replace
+            if (this.$route.path !== "/home") {
+              this.$router.replace(location);
+            } else {
+              this.$router.push(location);
+            }
           }
         }
 

@@ -12,24 +12,28 @@ import Login from "@/pages/Login"
 export default new VueRouter({
     routes:[
         {
-            path:'/search',
+            // path:'/search',
+            name:"search",
+            path:'/search/:keyword?',  // ?代表我的params参数可传可不传
             component:Search
         },
         {
             path:'/home',
-            component:Home
+            component:Home,
         },
         {
             path:'/register',
-            component:Register
+            component:Register,
+            meta:{
+                isHidden:true
+            }
         },
         {
             path:'/login',
-            component:Login
-        },
-        {
-            path:'/search',
-            component:Search
+            component:Login,
+            meta:{
+                isHidden:true
+            }
         },
         {
             path:'/',
